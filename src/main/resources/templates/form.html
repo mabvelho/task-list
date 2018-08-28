@@ -1,20 +1,100 @@
 <!DOCTYPE HTML>
-<HTML>
+<HTML th:replace="~{fragments/layout :: layout (~{::body},'taskForm')}">
+	
 	<HEAD>
 		<title>Task List</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<style>
+		<style>	
+			h1 {
+				text-align: center;
+			}
+			
+			.button {
+				width:5%;
+				padding: 0.3%;
+				color:black;
+				-webkit-transition-duration: 0.3s; /* Safari */
+				transition-duration: 0.3s;
+			}
+			
+			.button:hover {
+				background-color: black;
+				color:white;
+			}
+			
+			input {
+				width: 94%;
+			}
+			
+			form {
+				width: 80%;
+				margin-left: 10%;
+				margin-right: 10%
+			}
+			
+			.status {
+				width:5%;
+			}
+			
+			.remover {
+				background-color: #f9f9f9;
+				color:red;
+				text-align: center;
+				-webkit-transition-duration: 0.3s; /* Safari */
+				transition-duration: 0.3s;
+			}
+			
+			.remover:hover {
+				background-color: red;
+				color:white;
+				text-align: center;
+			}
+			
+			table {
+				width: 80%;
+				margin-left: 10%;
+				margin-right: 10%
+			}
+			
+			th {
+				background-color: #3279a3;
+				color: #ffffff;
+				font-size: 18px;
+			}
+			
+			tr:nth-child(even) {
+				background-color: #d1f0f9;
+				color: black;
+			}
+			
+			tr:nth-child(odd) {
+				background-color: #f9f9f9;
+				color: black;
+			}
+			
+			tr:hover {
+				-webkit-transition-duration: 0.3s; /* Safari */
+				transition-duration: 0.3s;
+				background-color: #097cbf;
+				color: white;
+			}
+			
+			td {
+				padding: 1%;
+			}
 		</style>
 	</HEAD>
 	<BODY>
 		<h1>Welcome to the Task List</h1>
-		<form action="">
-			<button ID="btnSubmit" name="btnSubmit" >Add Task</button>
-			<input TYPE="TEXT" />
+		<form method="post" th:object="${task}" >
+			<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>
+			<input th:replace="~{fragments/inputField :: input ('Task', 'task', 'text')}" />
 		</form>
-		<table>
+		<br>
+		<table class="table">
 			<thead>
 				<tr>
+					<th class="status">Status</th>
 					<th> Task </th>					
 				</tr>
 			</thead>		
@@ -22,10 +102,11 @@
 				<tr th:if="${taskList.empty}">
 	            	<td colspan="2"> No Tasks Available </td>
 	        	</tr>
-	        	<tr th:each="task : ${taskList}">
-	            	<td><span th:text="${taskList.task}"> Task </span></td>
-	        	</tr>
+	        	<tr th:each="t : ${taskList}">
+	        		<td class="remover">X</td>
+	            	<td><span th:text="${t.task}"> Task </span></td>
+	        	</tr>	        	 
 			</tbody>
 		</table>
 	</BODY>
-</HTML>
+</HTML>   

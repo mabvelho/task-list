@@ -2,11 +2,11 @@ package tasklist;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.Repository;
 
-public interface TaskRepository extends CrudRepository<TaskForm, Long> {
+public interface TaskRepository extends Repository<TaskForm, Long> {
 
-	public List<TaskForm> displayAllTasks();
+	public List<TaskForm> findAll();
 	
-	public void addToList(TaskForm task);
+	public void save(TaskForm task);
 }

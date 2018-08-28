@@ -21,11 +21,15 @@ public class TaskForm {
     
     protected TaskForm() {}
     
-    public String getName() {
+    public TaskForm(String task) {
+    	this.task = task;
+    }
+    
+    public String getTask() {
         return this.task;
     }
 
-    public void setName(String task) {
+    public void setTask(String task) {
         this.task = task;
     }
 
