@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<title>Task List</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+		</style>
+	</HEAD>
+	<BODY>
+		<h1>Welcome to the Task List</h1>
+		<form action="">
+			<button ID="btnSubmit" name="btnSubmit" >Add Task</button>
+			<input TYPE="TEXT" />
+		</form>
+		<table>
+			<thead>
+				<tr>
+					<th> Task </th>					
+				</tr>
+			</thead>		
+			<tbody>
+				<tr th:if="${taskList.empty}">
+	            	<td colspan="2"> No Tasks Available </td>
+	        	</tr>
+	        	<tr th:each="task : ${taskList}">
+	            	<td><span th:text="${taskList.task}"> Task </span></td>
+	        	</tr>
+			</tbody>
+		</table>
+	</BODY>
+</HTML>
