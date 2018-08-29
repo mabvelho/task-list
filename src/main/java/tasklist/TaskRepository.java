@@ -9,4 +9,6 @@ public interface TaskRepository extends Repository<TaskForm, Long> {
 	public List<TaskForm> findAll();
 	
 	public void save(TaskForm task);
+	
+	public void delete(TaskForm task);
 }

@@ -85,10 +85,27 @@
 		</style>
 	</HEAD>
 	<BODY>
+		<script>
+			this.onload = onload;
+			function onload() {
+				document.getElementById('txtTask').focus();
+				
+			}
+			
+			this.removerTask = removerTask;
+			function removerTask(td) {
+				if (confirm('Deseja realmente excluir?')) {
+					var a = td.parentElement.children[2].children[0];
+					a.click();
+				}
+			}
+		
+		</script>
+		
 		<h1>Welcome to the Task List</h1>
 		<form action="#" method="post" th:action="@{/}" th:object="${taskForm}" >
 			<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>
-			<input type="text" th:field="*{task}" />
+			<input id="txtTask" name="txtTask" type="text" th:field="*{task}" />
 		</form>
 		<br>
 		<table class="table">
@@ -103,8 +120,11 @@
 	            	<td colspan="2"> No Tasks Available </td>
 	        	</tr>
 	        	<tr th:each="t : ${taskList}">
-	        		<td class="remover">X</td>
+	        		<td onclick="removerTask(this);" class="remover">X</td>
 	            	<td><span th:text="${t.task}"> Task </span></td>
+					<td style="display:none">
+						<a th:href="@{/delete/{id}(id=${t.id})}">Excluir</a>
+					</td>
 	        	</tr>	        	 
 			</tbody>
 		</table>
