@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<HTML th:replace="~{fragments/layout :: layout (~{::body},'taskForm')}">
+<HTML >
 	
 	<HEAD>
 		<title>Task List</title>
@@ -86,9 +86,9 @@
 	</HEAD>
 	<BODY>
 		<h1>Welcome to the Task List</h1>
-		<form method="post" th:object="${task}" >
+		<form action="#" method="post" th:action="@{/}" th:object="${taskForm}" >
 			<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>
-			<input th:replace="~{fragments/inputField :: input ('Task', 'task', 'text')}" />
+			<input type="text" th:field="*{task}" />
 		</form>
 		<br>
 		<table class="table">

@@ -11,7 +11,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 	
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(TaskRepository repository) {
 		return (args) -> {
 			// save a couple of customers
@@ -19,8 +19,8 @@ public class Application {
 			repository.save(new TaskForm("Chloe"));
 			repository.save(new TaskForm("Kim"));
 			repository.save(new TaskForm("David"));
-			repository.save(new TaskForm("Michelle"));
+			repository.save(new TaskForm("Michelle"))
 		};
-	}
+	}*/
 
 }
