@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+
+import javax.validation.Valid;
 
 @Controller
 public class WebController {
@@ -25,8 +28,10 @@ public class WebController {
 	}
 
 	@PostMapping("/")
-	public String addTask(@ModelAttribute(name="taskForm") TaskForm taskForm) {
-
+	public String addTask(@Valid @ModelAttribute(name="taskForm") TaskForm taskForm, BindingResult result) {
+		if (result.hasErrors()) {
+            return "redirect:/";
+		}
 		this.repository.save(taskForm);
 
 		return "redirect:/";
