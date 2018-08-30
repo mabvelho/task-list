@@ -4,6 +4,7 @@
 	<HEAD>
 		<title>Task List</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="refresh" content="5"/>
 		<style>	
 			h1 {
 				text-align: center;
@@ -84,7 +85,7 @@
 			}
 		</style>
 	</HEAD>
-	<BODY>
+	<BODY onload="onload();">
 		<script>
 			this.onload = onload;
 			function onload() {
@@ -104,11 +105,11 @@
 		
 		<h1>Welcome to the Task List</h1>
 		<form action="#" method="post" th:action="@{/}" th:object="${taskForm}" >
-			<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>
-			<input id="txtTask" name="txtTask" type="text" th:field="*{task}" />
+				<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>			
+				<input id="txtTask" name="txtTask" type="text" th:field="*{task}" />
 		</form>
 		<br>
-		<table class="table">
+		<table>
 			<thead>
 				<tr>
 					<th class="status">Status</th>

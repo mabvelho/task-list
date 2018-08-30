@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Valid;
 
 @Controller
-public class WebController {
+public class WebController implements WebMvcConfigurer{
 	
 	private final TaskRepository repository;
 	
@@ -28,9 +29,10 @@ public class WebController {
 	}
 
 	@PostMapping("/")
-	public String addTask(@Valid @ModelAttribute(name="taskForm") TaskForm taskForm, BindingResult result) {
-		if (result.hasErrors()) {
-            return "redirect:/";
+	public String addTask(TaskForm taskForm, Model model) {
+		if (hasErrors(taskForm)) {
+			model.addAttribute("taskList", this.repository.findAll());
+            return "form";
 		}
 		this.repository.save(taskForm);
 
@@ -44,5 +46,9 @@ public class WebController {
 		this.repository.delete(t);
 
 		return "redirect:/";
+	}
+	
+	private boolean hasErrors(TaskForm taskForm) {
+		return !(2 < taskForm.getTask().length() || taskForm.getTask().length() < 30);
 	}
 }
