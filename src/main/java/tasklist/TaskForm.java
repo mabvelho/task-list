@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class TaskForm {
 
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min=2, max=100)
     private String task;
     
     @Id

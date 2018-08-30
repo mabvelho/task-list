@@ -4,15 +4,44 @@
 	<HEAD>
 		<title>Task List</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="refresh" content="5"/>
-		<style>	
+		<meta http-equiv="refresh" content="30"/>
+		<style>			
+			@font-face { /* declare fonts */
+				font-family: "Museo300";
+				src: url("@{/../static/resources/fonts/Museo300.otf}");
+				url("@{/../static/resources/fonts/Museo300.otf}") format("opentype");
+			}
+			
+			HTML::after {
+				content: "";
+				background: url("/../static/resources/images/bg_image.png") no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				opacity: 0.85;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				position: absolute;
+				z-index: -1;   
+			}
+			
+			#main::after {
+				opacity : 0.2;
+			}
+
 			h1 {
 				text-align: center;
+				font: 24px/1 Museo300;
+				color: #FFFFFF;
 			}
 			
 			.button {
 				width:5%;
 				padding: 0.3%;
+				font-family: "Museo300";
 				color:black;
 				-webkit-transition-duration: 0.3s; /* Safari */
 				transition-duration: 0.3s;
@@ -39,14 +68,15 @@
 			
 			.remover {
 				background-color: #f9f9f9;
-				color:red;
+				color:#CE1126;
+				font-family: "Museo300";
 				text-align: center;
 				-webkit-transition-duration: 0.3s; /* Safari */
 				transition-duration: 0.3s;
 			}
 			
 			.remover:hover {
-				background-color: red;
+				background-color: #CE1126;
 				color:white;
 				text-align: center;
 			}
@@ -58,25 +88,28 @@
 			}
 			
 			th {
-				background-color: #3279a3;
+				background-color: #007DB8;
 				color: #ffffff;
 				font-size: 18px;
+				font-family: "Museo300";
 			}
 			
 			tr:nth-child(even) {
-				background-color: #d1f0f9;
+				background-color: #AAAAAA;
 				color: black;
+				font-family: "Museo300";
 			}
 			
 			tr:nth-child(odd) {
 				background-color: #f9f9f9;
 				color: black;
+				font-family: "Museo300";
 			}
 			
 			tr:hover {
 				-webkit-transition-duration: 0.3s; /* Safari */
 				transition-duration: 0.3s;
-				background-color: #097cbf;
+				background-color: #007DB8;
 				color: white;
 			}
 			
@@ -100,11 +133,25 @@
 					a.click();
 				}
 			}
+			
+			this.validarInput = validarInput;
+			function validarInput() {
+				var input = document.getElementById('txtTask').value;
+				if (input === '' || input === null || input === undefined) {
+					alert('Task size must be between 2 and 100 characteres.');
+					return false;
+				}
+				if (input.length < 2 || input.length > 100) {
+					alert('Task size must be between 2 and 100 characteres.');
+					return false;
+				}
+				return true;
+			}
 		
 		</script>
 		
 		<h1>Welcome to the Task List</h1>
-		<form action="#" method="post" th:action="@{/}" th:object="${taskForm}" >
+		<form action="#" onsubmit="validarInput();" method="post" th:action="@{/}" th:object="${taskForm}" >
 				<button class="button" ID="btnSubmit" name="btnSubmit" >Add Task</button>			
 				<input id="txtTask" name="txtTask" type="text" th:field="*{task}" />
 		</form>

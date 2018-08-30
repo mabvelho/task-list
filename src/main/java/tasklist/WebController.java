@@ -45,6 +45,6 @@ public class WebController {
 	}
 	
 	private boolean hasErrors(TaskForm taskForm) {
-		return !(2 < taskForm.getTask().length() && taskForm.getTask().length() < 30);
+		return !(2 < taskForm.getTask().length() && taskForm.getTask().length() <= 100);
 	}
 }
