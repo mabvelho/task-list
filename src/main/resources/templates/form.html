@@ -1,154 +1,15 @@
 <!DOCTYPE HTML>
-<HTML >
+<HTML xmlns:th="http://www.thymeleaf.org">
 	
 	<HEAD>
 		<title>Task List</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="refresh" content="30"/>
-		<style>			
-			@font-face { /* declare fonts */
-				font-family: "Museo300";
-				src: url("@{/../static/resources/fonts/Museo300.otf}");
-				url("@{/../static/resources/fonts/Museo300.otf}") format("opentype");
-			}
-			
-			HTML::after {
-				content: "";
-				background: url("/../static/resources/images/bg_image.png") no-repeat center center fixed;
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				-o-background-size: cover;
-				background-size: cover;
-				opacity: 0.85;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				position: absolute;
-				z-index: -1;   
-			}
-			
-			#main::after {
-				opacity : 0.2;
-			}
-
-			h1 {
-				text-align: center;
-				font: 24px/1 Museo300;
-				color: #FFFFFF;
-			}
-			
-			.button {
-				width:5%;
-				padding: 0.3%;
-				font-family: "Museo300";
-				color:black;
-				-webkit-transition-duration: 0.3s; /* Safari */
-				transition-duration: 0.3s;
-			}
-			
-			.button:hover {
-				background-color: black;
-				color:white;
-			}
-			
-			input {
-				width: 94%;
-			}
-			
-			form {
-				width: 80%;
-				margin-left: 10%;
-				margin-right: 10%
-			}
-			
-			.status {
-				width:5%;
-			}
-			
-			.remover {
-				background-color: #f9f9f9;
-				color:#CE1126;
-				font-family: "Museo300";
-				text-align: center;
-				-webkit-transition-duration: 0.3s; /* Safari */
-				transition-duration: 0.3s;
-			}
-			
-			.remover:hover {
-				background-color: #CE1126;
-				color:white;
-				text-align: center;
-			}
-			
-			table {
-				width: 80%;
-				margin-left: 10%;
-				margin-right: 10%
-			}
-			
-			th {
-				background-color: #007DB8;
-				color: #ffffff;
-				font-size: 18px;
-				font-family: "Museo300";
-			}
-			
-			tr:nth-child(even) {
-				background-color: #AAAAAA;
-				color: black;
-				font-family: "Museo300";
-			}
-			
-			tr:nth-child(odd) {
-				background-color: #f9f9f9;
-				color: black;
-				font-family: "Museo300";
-			}
-			
-			tr:hover {
-				-webkit-transition-duration: 0.3s; /* Safari */
-				transition-duration: 0.3s;
-				background-color: #007DB8;
-				color: white;
-			}
-			
-			td {
-				padding: 1%;
-			}
-		</style>
-	</HEAD>
-	<BODY onload="onload();">
-		<script>
-			this.onload = onload;
-			function onload() {
-				document.getElementById('txtTask').focus();
-				
-			}
-			
-			this.removerTask = removerTask;
-			function removerTask(td) {
-				if (confirm('Deseja realmente excluir?')) {
-					var a = td.parentElement.children[2].children[0];
-					a.click();
-				}
-			}
-			
-			this.validarInput = validarInput;
-			function validarInput() {
-				var input = document.getElementById('txtTask').value;
-				if (input === '' || input === null || input === undefined) {
-					alert('Task size must be between 2 and 100 characteres.');
-					return false;
-				}
-				if (input.length < 2 || input.length > 100) {
-					alert('Task size must be between 2 and 100 characteres.');
-					return false;
-				}
-				return true;
-			}
 		
-		</script>
+		<script src="formjs.js" th:src="@{/js/formjs.js}" ></script>
+		<link rel="stylesheet" type="text/css" href="formcss.css" th:href="@{/css/formcss.css}" />
+	</HEAD>
+	<BODY onload="onload();">		
 		
 		<h1>Welcome to the Task List</h1>
 		<form action="#" onsubmit="validarInput();" method="post" th:action="@{/}" th:object="${taskForm}" >
